@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 
 const InputTodo = (props) => {
+  const { addTodoProps } = props;
   const [inputText, setInputText] = useState({
     title: '',
   });
@@ -15,7 +17,7 @@ const InputTodo = (props) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (inputText.title.trim()) {
-      props.addTodoProps(inputText.title);
+      addTodoProps(inputText.title);
       setInputText({
         title: '',
       });
@@ -34,9 +36,17 @@ const InputTodo = (props) => {
         name="title"
         onChange={onChange}
       />
-      <button className="input-submit">Submit</button>
+      <button type="submit" className="input-submit">Submit</button>
     </form>
   );
+};
+
+InputTodo.defaultProps = {
+  addTodoProps: '',
+};
+
+InputTodo.propTypes = {
+  addTodoProps: PropTypes.func,
 };
 
 export default InputTodo;
